@@ -1,0 +1,23 @@
+ext {
+    android = [
+            compileSdkVersion: 30,
+            buildToolsVersion: "30.0.3",
+            minSdkVersion    : 19,
+            targetSdkVersion : 30,
+            versionCode      : 1,
+            versionName      : "1.0",
+            is_application   : true,
+    ]
+    dependencies = [
+            publicImplementation: [
+                    'androidx.appcompat:appcompat:1.2.0',
+                    'androidx.constraintlayout:constraintlayout:2.0.4'
+            ],
+            other: [
+                    ':basic', //base类
+                    ':common',  //公共类
+                    ':arouter', //路由表,储存所有class
+                    ':annotation'   //注解处理器
+            ]
+    ]
+}
