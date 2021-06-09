@@ -13,11 +13,12 @@ ext {
                     'androidx.appcompat:appcompat:1.2.0',
                     'androidx.constraintlayout:constraintlayout:2.0.4'
             ],
-            other: [
+            other               : [
                     ':basic', //base类
                     ':common',  //公共类
                     ':arouter', //路由表,储存所有class
-                    ':annotation'   //注解处理器
+                    ':annotation',   //注解处理器
+                    ':loading'  //加载框
             ]
     ]
 }

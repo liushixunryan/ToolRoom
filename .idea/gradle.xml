@@ -18,6 +18,7 @@
             <option value="$PROJECT_DIR$/basic" />
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/constellation" />
+            <option value="$PROJECT_DIR$/loading" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

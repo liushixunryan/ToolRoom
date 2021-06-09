@@ -3,6 +3,7 @@ package com.xql.constellation.viewpager;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
+
 import androidx.lifecycle.Observer;
 
 import com.xql.basic.fragment.BaseFragment;
@@ -20,6 +21,7 @@ import com.xql.constellation.vm.TodayVM;
 
 public class TodayFragment extends BaseFragment<ViewpagerTodayBinding, TodayVM> {
     private String constellationname;
+
     @Override
     protected int layoutId() {
         return R.layout.viewpager_today;
@@ -33,6 +35,7 @@ public class TodayFragment extends BaseFragment<ViewpagerTodayBinding, TodayVM> 
 
     @Override
     protected void initData(Context context) {
+        showLoading();
         mViewModel.getToday(constellationname).observe(getActivity(), new Observer<TodayBean>() {
             @SuppressLint("SetTextI18n")
             @Override
@@ -48,6 +51,8 @@ public class TodayFragment extends BaseFragment<ViewpagerTodayBinding, TodayVM> 
                 mBinding.worktv.setText(todayBean.getWork() + "分");
                 mBinding.alltv.setText(todayBean.getAll() + "分");
                 mBinding.summarytv.setText(todayBean.getSummary() + "");
+
+                hideLoading();
             }
         });
     }

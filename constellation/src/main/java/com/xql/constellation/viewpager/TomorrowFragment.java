@@ -34,6 +34,8 @@ public class TomorrowFragment extends BaseFragment<ViewpagerTomorrowBinding, Tom
 
     @Override
     protected void initData(Context context) {
+        showLoading();
+
         mViewModel.getTomorrow(constellationname).observe(getActivity(), new Observer<TomorrowBean>() {
             @SuppressLint("SetTextI18n")
             @Override
@@ -49,6 +51,8 @@ public class TomorrowFragment extends BaseFragment<ViewpagerTomorrowBinding, Tom
                 mBinding.worktv.setText(tomorrowBean.getWork() + "分");
                 mBinding.alltv.setText(tomorrowBean.getAll() + "分");
                 mBinding.summarytv.setText(tomorrowBean.getSummary() + "");
+
+                hideLoading();
             }
         });
     }

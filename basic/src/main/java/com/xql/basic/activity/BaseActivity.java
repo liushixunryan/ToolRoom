@@ -16,6 +16,7 @@ import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.xql.basic.viewmodel.BaseViewModel;
+import com.xql.loading.LoadingDialog;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -31,8 +32,10 @@ import java.util.List;
 
 public abstract class BaseActivity<B extends ViewDataBinding, VM extends BaseViewModel> extends AppCompatActivity {
     protected final String TAG = "sansuiban";
+    //等待窗对象
+    private LoadingDialog loadingDialog;
     public B mBinding;
-    public  VM mViewModel;
+    public VM mViewModel;
     //是否显示标题栏
     private boolean isShowTitle = true;
     //是否显示状态栏
@@ -71,10 +74,10 @@ public abstract class BaseActivity<B extends ViewDataBinding, VM extends BaseVie
         } else {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
-
         //初始化布局
         mBinding = DataBindingUtil.setContentView(this, layoutId());
         mBinding.setLifecycleOwner(this);
+        initDialog();
         //创建我们的ViewModel。
         createViewModel();
         //初始化控件
@@ -82,6 +85,33 @@ public abstract class BaseActivity<B extends ViewDataBinding, VM extends BaseVie
         //设置数据
         initData();
     }
+
+    /**
+     * 初始化各种Dialog
+     */
+    private void initDialog() {
+        if (loadingDialog == null) {
+            loadingDialog = new LoadingDialog(this);
+        }
+    }
+
+    /**
+     * 显示等待Dialog
+     */
+    public void showLoading() {
+        if (loadingDialog != null && !loadingDialog.isShowing())
+            loadingDialog.show();
+    }
+
+    /**
+     * 显示等待Dialog，可自定义显示内容
+     */
+    public LoadingDialog showLoading(String msg) {
+        if (loadingDialog != null && !loadingDialog.isShowing())
+            loadingDialog.setMessage(msg).show();
+        return loadingDialog;
+    }
+
 
     /**
      * 绑定viewmodel
@@ -100,6 +130,16 @@ public abstract class BaseActivity<B extends ViewDataBinding, VM extends BaseVie
             mViewModel = (VM) new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(modelClass);
         }
     }
+
+    /**
+     * 隐藏等待Dialog
+     */
+    public void hideLoading() {
+        if (loadingDialog != null && loadingDialog.isShowing()) {
+            loadingDialog.dismiss();
+        }
+    }
+
 
     /**
      * 初始化布局

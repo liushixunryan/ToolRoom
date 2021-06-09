@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.xql.basic.viewmodel.BaseViewModel;
+import com.xql.loading.LoadingDialog;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -26,12 +27,15 @@ import java.lang.reflect.Type;
  * @UpdateUser: RyanLiu
  */
 
-public abstract class BaseFragment<B extends ViewDataBinding,VM extends BaseViewModel> extends Fragment {
+public abstract class BaseFragment<B extends ViewDataBinding, VM extends BaseViewModel> extends Fragment {
     //获取TAG的fragment名称
     protected final String TAG = "sansuiban";
     protected B mBinding;
     protected VM mViewModel;
     public Context context;
+
+    //等待窗对象
+    private LoadingDialog loadingDialog;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -44,12 +48,47 @@ public abstract class BaseFragment<B extends ViewDataBinding,VM extends BaseView
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, layoutId(), container, false);
         mBinding.setLifecycleOwner(getActivity());
+        initDialog();
         //创建我们的ViewModel。
         createViewModel();
-
         initView(mBinding);
         initData(context);
         return mBinding.getRoot();
+    }
+
+    /**
+     * 初始化各种Dialog
+     */
+    private void initDialog() {
+        if (loadingDialog == null) {
+            loadingDialog = new LoadingDialog(getActivity());
+        }
+    }
+
+    /**
+     * 显示等待Dialog
+     */
+    public void showLoading() {
+        if (loadingDialog != null && !loadingDialog.isShowing())
+            loadingDialog.show();
+    }
+
+    /**
+     * 显示等待Dialog，可自定义显示内容
+     */
+    public LoadingDialog showLoading(String msg) {
+        if (loadingDialog != null && !loadingDialog.isShowing())
+            loadingDialog.setMessage(msg).show();
+        return loadingDialog;
+    }
+
+    /**
+     * 隐藏等待Dialog
+     */
+    public void hideLoading() {
+        if (loadingDialog != null && loadingDialog.isShowing()) {
+            loadingDialog.dismiss();
+        }
     }
 
     /**

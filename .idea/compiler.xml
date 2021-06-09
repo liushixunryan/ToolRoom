@@ -23,6 +23,7 @@
       <module name="ToolRoom.basic" target="1.8" />
       <module name="ToolRoom.common" target="1.8" />
       <module name="ToolRoom.constellation" target="1.8" />
+      <module name="ToolRoom.loading" target="1.8" />
       <module name="ToolRoom.network" target="1.8" />
     </bytecodeTargetLevel>
   </component>

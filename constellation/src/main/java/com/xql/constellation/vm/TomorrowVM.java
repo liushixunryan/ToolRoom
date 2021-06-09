@@ -4,6 +4,7 @@ import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.xql.basic.viewmodel.BaseViewModel;
 import com.xql.common.network.RetrofitManager;
 import com.xql.constellation.bean.TodayBean;
@@ -29,32 +30,27 @@ public class TomorrowVM extends BaseViewModel {
      */
     public MutableLiveData<TomorrowBean> getTomorrow(String constellationname) {
         final MutableLiveData<TomorrowBean> liveData = new MutableLiveData<>();
-        RetrofitManager.newInstance()
-                .creat(APIService.class)
-                .getTomorrow(constellationname)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<TomorrowBean>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-                        Log.e("sansuiban", "aaaaa: " + d );
-                    }
+        RetrofitManager.newInstance().creat(APIService.class).getTomorrow(constellationname).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<TomorrowBean>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+                Log.e("sansuiban", "aaaaa: " + d);
+            }
 
-                    @Override
-                    public void onNext(@NonNull TomorrowBean tomorrowBean) {
-                        liveData.postValue(tomorrowBean);
-                    }
+            @Override
+            public void onNext(@NonNull TomorrowBean tomorrowBean) {
+                liveData.postValue(tomorrowBean);
+            }
 
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-                        Log.e("sansuiban", "ccccc: " + e );
-                    }
+            @Override
+            public void onError(@NonNull Throwable e) {
+                ToastUtils.showLong("网络错误");
+            }
 
-                    @Override
-                    public void onComplete() {
-                        Log.e("sansuiban", "bbbb: ");
-                    }
-                });
+            @Override
+            public void onComplete() {
+                Log.e("sansuiban", "bbbb: ");
+            }
+        });
         return liveData;
     }
 }
