@@ -26,7 +26,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class TomorrowVM extends BaseViewModel {
     /**
-     * 今日运势网络请求
+     * 明日运势网络请求
      */
     public MutableLiveData<TomorrowBean> getTomorrow(String constellationname) {
         final MutableLiveData<TomorrowBean> liveData = new MutableLiveData<>();
