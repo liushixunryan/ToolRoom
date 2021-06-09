@@ -18,7 +18,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -30,6 +30,22 @@ android {
     //引入DataBinding
     dataBinding {
         enabled = true
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
+    signingConfigs {
+        config {
+            keyAlias 'toolroom'
+            keyPassword 'lsx0809'
+            storeFile file('../toolroom.jks')
+            storePassword 'lsx0809'
+        }
     }
 
 }
