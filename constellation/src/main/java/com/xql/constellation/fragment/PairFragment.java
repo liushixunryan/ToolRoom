@@ -53,7 +53,7 @@ public class PairFragment extends BaseFragment<FragmentPairBinding, PairVM> {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 //男方
-                men = constellation_name[i] + "座";
+                men = constellation_name[i];
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -65,7 +65,7 @@ public class PairFragment extends BaseFragment<FragmentPairBinding, PairVM> {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 //女方
-                women = constellation_name[i] + "座";
+                women = constellation_name[i];
 
             }
 
@@ -78,7 +78,6 @@ public class PairFragment extends BaseFragment<FragmentPairBinding, PairVM> {
         mBinding.searchBtn.setOnClickListener(new OnSingleClickListener() {
             @Override
             public void onSingleClick(View view) {
-                ToastUtils.showLong("查询");
                 Log.i(TAG, "onItemSelected: " + men + women);
 
                 Bundle bundle = new Bundle();
