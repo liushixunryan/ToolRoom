@@ -7,6 +7,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.google.android.material.tabs.TabLayout;
@@ -38,6 +39,9 @@ public class FortuneDetailsActivity extends BaseActivity<ActivityFortuneDetailsB
 
     @Override
     protected void initView() {
+        mBinding.titleTv.setText("运势详情");
+        mBinding.backImg.setVisibility(View.VISIBLE);
+
         fragments = new ArrayList<>();
         fragments.add(new TodayFragment());
         fragments.add(new TomorrowFragment());
@@ -82,6 +86,15 @@ public class FortuneDetailsActivity extends BaseActivity<ActivityFortuneDetailsB
 
     @Override
     protected void initData() {
+        onClick();
+    }
 
+    private void onClick() {
+        mBinding.backImg.setOnClickListener(new OnSingleClickListener() {
+            @Override
+            public void onSingleClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 }
