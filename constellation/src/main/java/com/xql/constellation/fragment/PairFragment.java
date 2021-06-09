@@ -1,10 +1,19 @@
 package com.xql.constellation.fragment;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
+import androidx.lifecycle.Observer;
+
+import com.blankj.utilcode.util.ToastUtils;
+import com.xql.arouter.ARouter;
 import com.xql.basic.fragment.BaseFragment;
 import com.xql.constellation.R;
+import com.xql.constellation.bean.PairBean;
 import com.xql.constellation.databinding.FragmentPairBinding;
 import com.xql.constellation.vm.PairVM;
 
@@ -16,7 +25,10 @@ import com.xql.constellation.vm.PairVM;
  */
 
 public class PairFragment extends BaseFragment<FragmentPairBinding, PairVM> {
-    private final String[] constellation_name = {"水瓶座", "双鱼座", "白羊座", "金牛座", "双子座", "巨蟹座", "狮子座", "处女座", "天秤座", "天蝎座", "射手座", "摩羯座"};
+    private final String[] constellation_name = {"水瓶", "双鱼", "白羊", "金牛", "双子", "巨蟹", "狮子", "处女", "天秤", "天蝎", "射手", "摩羯"};
+
+    private String men;
+    private String women;
     @Override
     protected int layoutId() {
         return R.layout.fragment_pair;
@@ -32,5 +44,49 @@ public class PairFragment extends BaseFragment<FragmentPairBinding, PairVM> {
     @Override
     protected void initData(Context context) {
 
+        onClick();
+    }
+
+    private void onClick() {
+        mBinding.pairMESpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                //男方
+                men = constellation_name[i] + "座";
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        mBinding.pairTASpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                //女方
+                women = constellation_name[i] + "座";
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        mBinding.searchBtn.setOnClickListener(new OnSingleClickListener() {
+            @Override
+            public void onSingleClick(View view) {
+                ToastUtils.showLong("查询");
+                Log.i(TAG, "onItemSelected: " + men + women);
+
+                Bundle bundle = new Bundle();
+                bundle.putString("men", men);
+                bundle.putString("women", women);
+                ARouter.getInstance().jumpActivity("querydetails/querydetails",bundle);
+
+            }
+        });
     }
 }

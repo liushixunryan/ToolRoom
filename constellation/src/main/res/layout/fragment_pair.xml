@@ -26,7 +26,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="请选择您的星座: "
+                    android:text="请选择男方的星座: "
                     android:textColor="#000000"
                     android:textSize="15sp" />
 
@@ -51,7 +51,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="请选择TA的星座: "
+                    android:text="请选择女方的星座: "
                     android:textColor="#000000"
                     android:textSize="15sp" />
 
@@ -66,6 +66,7 @@
             </LinearLayout>
 
             <Button
+                android:id="@+id/search_btn"
                 android:layout_marginTop="100dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

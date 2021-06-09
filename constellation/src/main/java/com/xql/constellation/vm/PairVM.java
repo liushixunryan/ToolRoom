@@ -1,5 +1,4 @@
 package com.xql.constellation.vm;
-
 import com.xql.basic.viewmodel.BaseViewModel;
 
 /**

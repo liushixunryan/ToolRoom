@@ -3,7 +3,8 @@
     package="com.xql.constellation">
 
     <application>
-        <activity android:name=".FortuneDetailsActivity"></activity>
+        <activity android:name=".QueryDetailActivity"></activity>
+        <activity android:name=".FortuneDetailsActivity" />
         <activity android:name=".ConstellationActivity" />
     </application>
 
