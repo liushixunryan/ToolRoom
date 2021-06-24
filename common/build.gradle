@@ -35,6 +35,7 @@ android {
 dependencies {
     api rootProject.ext.dependencies.publicImplementation
     api 'com.google.android.material:material:1.1.0'
+    api files('libs\\QWeather_Public_Android_V4.5.jar')
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -55,5 +56,7 @@ dependencies {
     api 'com.yanzhenjie:permission:2.0.3'
     //导入图片的包
     api 'com.github.bumptech.glide:glide:4.11.0'
+    //底部上拉控件
+    api 'com.github.qingmei2:SlideBottomLayout-Android:1.2.3'
 
 }

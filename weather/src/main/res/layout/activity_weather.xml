@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:background="#f2f2f2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".WeatherActivity">
+
+
+
+        <com.qingmei2.library.SlideBottomLayout
+            android:id="@+id/slide"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="100dp"
+            app:handler_height="50dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/handle"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#ff0000"
+                    android:gravity="center"
+                    android:text="handle"
+                    android:textColor="#ffffff" />
+
+                <TextView
+                    android:text="地理大大大"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:background="#ffffff"-->
+<!--                    android:id="@+id/dddd"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent" />-->
+
+            </LinearLayout>
+        </com.qingmei2.library.SlideBottomLayout>
+
+    </RelativeLayout>
+</layout>

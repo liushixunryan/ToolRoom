@@ -68,7 +68,11 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainVM> {
                 switch (ID) {
                     case 0:
                         ARouter.getInstance().jumpActivity("constellation/constellation", null);
-
+                        break;
+                    case 1:
+                        ToastUtils.showLong("dddss");
+                        ARouter.getInstance().jumpActivity("weather/weather", null);
+                        break;
                 }
             }
         });
