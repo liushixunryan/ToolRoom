@@ -37,9 +37,9 @@ public abstract class BaseActivity<B extends ViewDataBinding, VM extends BaseVie
     public B mBinding;
     public VM mViewModel;
     //是否显示标题栏
-    private boolean isShowTitle = true;
+    private boolean isShowTitle = false;
     //是否显示状态栏
-    private boolean isShowStatusBar = true;
+    private boolean isShowStatusBar = false;
     //是否允许旋转屏幕
     private boolean isAllowScreenRoate = true;
     public Context context;

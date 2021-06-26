@@ -5,10 +5,11 @@
 
     <RelativeLayout
         android:id="@+id/rl"
-        android:background="#f2f2f2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@mipmap/weatherbackground"
         tools:context=".WeatherActivity">
+
 
 
 
@@ -17,32 +18,170 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginTop="100dp"
-            app:handler_height="50dp">
+            app:handler_height="110dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/handle"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="#ff0000"
-                    android:gravity="center"
-                    android:text="handle"
-                    android:textColor="#ffffff" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/linearlayout_fillet"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:text="地理大大大"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginTop="20dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/permission_dp_30"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:lines="1"
+                            android:text="日出时间 : "
+                            android:textColor="#ffffff"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/permission_dp_30"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:lines="1"
+                            android:text="9:00"
+                            android:textColor="#ffffff"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/permission_dp_30"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:lines="1"
+                            android:text="日落时间 : "
+                            android:textColor="#ffffff"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/permission_dp_30"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:lines="1"
+                            android:text="18:00"
+                            android:textColor="#ffffff"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginTop="20dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/permission_dp_30"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:lines="1"
+                            android:text="月升时间 : "
+                            android:textColor="#ffffff"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/permission_dp_30"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:lines="1"
+                            android:text="9:00"
+                            android:textColor="#ffffff"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/permission_dp_30"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:lines="1"
+                            android:text="月落 : "
+                            android:textColor="#ffffff"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/permission_dp_30"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:lines="1"
+                            android:text="18:00"
+                            android:textColor="#ffffff"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/permission_dp_30"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:lines="1"
+                            android:text="月相信息 : "
+                            android:textColor="#ffffff"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/permission_dp_30"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:lines="1"
+                            android:text="上弦月"
+                            android:textColor="#ffffff"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-<!--                <androidx.recyclerview.widget.RecyclerView-->
-<!--                    android:background="#ffffff"-->
-<!--                    android:id="@+id/dddd"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent" />-->
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#ffffff"
+                        android:orientation="vertical">
+
+                        <include layout="@layout/air_quality_layout" />
+
+                        <include layout="@layout/life_index_layout" />
+
+                        <include layout="@layout/disaster_early_warning_layout" />
+                    </LinearLayout>
+
+
+                </ScrollView>
+
 
             </LinearLayout>
         </com.qingmei2.library.SlideBottomLayout>

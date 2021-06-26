@@ -12,7 +12,7 @@ android {
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -60,6 +60,7 @@ dependencies {
     //导入其他activity
     if (!rootProject.ext.android.is_application) {
         implementation project(path: ':constellation')
+        implementation project(path: ':weather')
 
     }
     //导入工具包

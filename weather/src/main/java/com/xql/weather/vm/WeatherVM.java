@@ -4,9 +4,17 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
+
+import com.qweather.sdk.bean.IndicesBean;
+import com.qweather.sdk.bean.base.IndicesType;
+import com.qweather.sdk.bean.base.Lang;
 import com.qweather.sdk.bean.geo.GeoBean;
 import com.qweather.sdk.view.QWeather;
 import com.xql.basic.viewmodel.BaseViewModel;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @ClassName: WeatherVM
@@ -24,7 +32,7 @@ public class WeatherVM extends BaseViewModel {
         QWeather.getGeoCityLookup(context, location, new QWeather.OnResultGeoListener() {
             @Override
             public void onError(Throwable throwable) {
-                Log.e(TAG, "onError: " + throwable.getMessage() );
+                Log.e(TAG, "onError: " + throwable.getMessage());
             }
 
             @Override
@@ -34,4 +42,25 @@ public class WeatherVM extends BaseViewModel {
         });
         return liveData;
     }
+
+    /**
+     * 生活指数网络请求
+     */
+    public MutableLiveData<IndicesBean> getIndices1D(Context context, String location) {
+        final MutableLiveData<IndicesBean> liveData = new MutableLiveData<>();
+        QWeather.getIndices1D(context, location, Lang.ZH_HANS , Collections.singletonList(IndicesType.ALL), new QWeather.OnResultIndicesListener() {
+            @Override
+            public void onError(Throwable throwable) {
+                Log.e(TAG, "onError: " + throwable.getMessage() );
+            }
+
+            @Override
+            public void onSuccess(IndicesBean indicesBean) {
+                liveData.postValue(indicesBean);
+            }
+        });
+        return liveData;
+    }
+
+
 }

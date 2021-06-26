@@ -3,7 +3,9 @@
     package="com.xql.weather">
 
     <application>
-        <activity android:name=".WeatherActivity"></activity>
+        <activity
+            android:name=".WeatherActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

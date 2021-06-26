@@ -3,9 +3,15 @@
     package="com.xql.constellation">
 
     <application>
-        <activity android:name=".QueryDetailActivity"></activity>
-        <activity android:name=".FortuneDetailsActivity" />
-        <activity android:name=".ConstellationActivity" />
+        <activity
+            android:name=".QueryDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FortuneDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ConstellationActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
