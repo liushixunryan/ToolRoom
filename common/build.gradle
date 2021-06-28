@@ -35,8 +35,6 @@ android {
 dependencies {
     api rootProject.ext.dependencies.publicImplementation
     api 'com.google.android.material:material:1.1.0'
-    api files('libs\\QWeather_Public_Android_V4.5.jar')
-    api files('libs\\AMap_Location_V5.3.1_20210331.jar')
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -49,6 +47,14 @@ dependencies {
     api 'com.squareup.okhttp3:logging-interceptor:3.12.8'
     api 'io.reactivex.rxjava2:rxandroid:2.0.2'  // 必要rxandrroid依赖，切线程时需要用到
 
+    //和风天气jar包
+    api files('libs\\QWeather_Public_Android_V4.5.jar')
+    //和风天气插件jar包
+    api files('libs\\QWeather_Plugin_SDK_Android_V1.5.jar')
+    //高德地图定位jar包
+    api files('libs\\AMap_Location_V5.3.1_20210331.jar')
+    //动态权限
+    api 'com.yanzhenjie:permission:2.0.3'
     //utilcodex
     api 'com.blankj:utilcodex:1.30.5'
     //gson

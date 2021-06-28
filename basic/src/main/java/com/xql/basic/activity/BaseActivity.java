@@ -15,8 +15,11 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.xql.basic.viewmodel.BaseViewModel;
 import com.xql.loading.LoadingDialog;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.runtime.Permission;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -263,5 +266,17 @@ public abstract class BaseActivity<B extends ViewDataBinding, VM extends BaseVie
         super.onDestroy();
         //activity管理
         ActivityCollector.removeActivity(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        super.onResume();
+        AndPermission.with(context).runtime().permission(Permission.WRITE_EXTERNAL_STORAGE, Permission.ACCESS_COARSE_LOCATION, Permission.READ_EXTERNAL_STORAGE, Permission.ACCESS_FINE_LOCATION).onDenied(permissions -> {
+            ToastUtils.showLong("权限获取失败,将退出应用");
+            ActivityCollector.finishAll();
+        }).onGranted(permissions -> {
+        }).start();
+
     }
 }
