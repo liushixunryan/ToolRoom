@@ -19,10 +19,11 @@
             android:textColor="#ffffff"
             android:textSize="22sp" />
 
-        <com.qweather.plugin.view.RightLargeView
-            android:id="@+id/rl_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+        <include
+            android:id="@+id/air_temperature"
+            layout="@layout/live_weather_layout" />
+
+
 
 
         <com.qingmei2.library.SlideBottomLayout
@@ -34,6 +35,7 @@
             app:handler_height="110dp">
 
             <LinearLayout
+                android:id="@+id/pull_up"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">

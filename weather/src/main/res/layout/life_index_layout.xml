@@ -11,7 +11,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:background="#4682B4"
+            android:background="#FFBBC0"
             android:gravity="center"
             android:text="生活指数"
             android:textColor="#ffffff"

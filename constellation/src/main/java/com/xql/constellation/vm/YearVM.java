@@ -7,7 +7,6 @@ import androidx.lifecycle.MutableLiveData;
 import com.blankj.utilcode.util.ToastUtils;
 import com.xql.basic.viewmodel.BaseViewModel;
 import com.xql.common.network.RetrofitManager;
-import com.xql.constellation.bean.WeekBean;
 import com.xql.constellation.bean.YearBean;
 import com.xql.constellation.network.APIService;
 

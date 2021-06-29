@@ -8,7 +8,6 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.xql.basic.viewmodel.BaseViewModel;
 import com.xql.common.network.RetrofitManager;
 import com.xql.constellation.bean.MonthBean;
-import com.xql.constellation.bean.WeekBean;
 import com.xql.constellation.network.APIService;
 
 import io.reactivex.Observer;

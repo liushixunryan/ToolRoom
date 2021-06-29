@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.xql.arouter.ARouter;
 import com.xql.basic.fragment.BaseFragment;
 import com.xql.constellation.R;

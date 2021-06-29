@@ -1,19 +1,9 @@
 package com.xql.toolroom.vm;
 
-import android.app.Application;
-
-import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.xql.basic.viewmodel.BaseViewModel;
 import com.xql.common.LiveDataBus;
-import com.xql.toolroom.R;
-import com.xql.toolroom.bean.FunctionBean;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @ClassName: MainVM
  * @Description: MainActivity的MainVM

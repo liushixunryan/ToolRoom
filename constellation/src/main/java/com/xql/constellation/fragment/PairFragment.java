@@ -7,13 +7,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
-import androidx.lifecycle.Observer;
-
-import com.blankj.utilcode.util.ToastUtils;
 import com.xql.arouter.ARouter;
 import com.xql.basic.fragment.BaseFragment;
 import com.xql.constellation.R;
-import com.xql.constellation.bean.PairBean;
 import com.xql.constellation.databinding.FragmentPairBinding;
 import com.xql.constellation.vm.PairVM;
 

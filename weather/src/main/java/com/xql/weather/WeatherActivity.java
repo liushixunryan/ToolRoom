@@ -1,10 +1,7 @@
 package com.xql.weather;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
 import android.util.Log;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.lifecycle.Observer;
 
@@ -13,29 +10,18 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.blankj.utilcode.util.GsonUtils;
-import com.blankj.utilcode.util.ToastUtils;
-import com.qweather.plugin.view.HeContent;
-import com.qweather.plugin.view.LeftLargeView;
-import com.qweather.plugin.view.QWeatherConfig;
-import com.qweather.plugin.view.RightLargeView;
 import com.qweather.sdk.bean.IndicesBean;
 import com.qweather.sdk.bean.geo.GeoBean;
 import com.xql.annotation.BindPath;
 import com.xql.basic.activity.BaseActivity;
 import com.xql.weather.databinding.ActivityWeatherBinding;
 import com.xql.weather.vm.WeatherVM;
-import com.yanzhenjie.permission.AndPermission;
-import com.yanzhenjie.permission.runtime.Permission;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @BindPath(key = "weather/weather")
 public class WeatherActivity extends BaseActivity<ActivityWeatherBinding, WeatherVM> {
     //定位需要的声明
     private AMapLocationClient mLocationClient = null;//定位发起端
     private AMapLocationClientOption mLocationOption = null;//定位参数
-
     //城市名
     private String loction;
     //和风天气城市id
@@ -49,8 +35,6 @@ public class WeatherActivity extends BaseActivity<ActivityWeatherBinding, Weathe
     @Override
     protected void initView() {
 
-        //替换天气图标为本地图标
-        QWeatherConfig.changeWeatherIcon();
         /**
          * 高德地图定位服务
          */
@@ -122,30 +106,7 @@ public class WeatherActivity extends BaseActivity<ActivityWeatherBinding, Weathe
 
     @Override
     protected void initData() {
-        RightLargeView rlView = findViewById(R.id.rl_view);
-        //方法参数同（7）左侧大布局右侧双布局
-        LinearLayout rightLayout = rlView.getRightLayout();
-        LinearLayout leftTopLayout = rlView.getLeftTopLayout();
-        LinearLayout leftBottomLayout = rlView.getLeftBottomLayout();
 
-        rlView.setStroke(0, Color.GRAY, 1,  Color.WHITE);
-        rlView.addLocation(leftTopLayout, 14, Color.WHITE);
-        rlView.addAqiText(leftTopLayout, 14);
-        rlView.addAqiQlty(leftTopLayout, 14);
-        rlView.addAqiNum(leftTopLayout, 14);
-        rlView.addAlarmIcon(leftTopLayout, 14);
-        rlView.addAlarmTxt(leftTopLayout, 14);
-        rlView.addWeatherIcon(leftTopLayout, 14);
-
-        rlView.addRainIcon(leftBottomLayout, 14);
-        rlView.addRainDetail(leftBottomLayout, 14, Color.WHITE);
-        rlView.addWindIcon(leftBottomLayout, 14);
-        rlView.addWind(leftBottomLayout, 14, Color.WHITE);
-        rlView.addCond(leftBottomLayout, 14, Color.WHITE);
-
-        rlView.addTemp(rightLayout, 40, Color.WHITE);
-        rlView.setViewGravity(HeContent.GRAVITY_RIGHT);
-        rlView.show();
     }
 
     @Override
