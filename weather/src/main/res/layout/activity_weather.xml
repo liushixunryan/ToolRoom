@@ -23,8 +23,12 @@
             android:id="@+id/air_temperature"
             layout="@layout/live_weather_layout" />
 
-
-
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/lineChart"
+            android:layout_width="match_parent"
+            android:layout_height="360dp"
+            android:layout_below="@+id/air_temperature"
+            android:background="@drawable/linearlayout_fillet" />
 
         <com.qingmei2.library.SlideBottomLayout
             android:id="@+id/slide"
@@ -40,7 +44,9 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <include layout="@layout/sun_and_moon_layout" />
+                <include
+                    android:id="@+id/sunandmoon_layout"
+                    layout="@layout/sun_and_moon_layout" />
 
                 <ScrollView
                     android:layout_width="match_parent"
@@ -54,11 +60,15 @@
                         android:background="#ffffff"
                         android:orientation="vertical">
 
-                        <include layout="@layout/air_quality_layout" />
+                        <include
+                            android:id="@+id/air_quality_layout"
+                            layout="@layout/air_quality_layout" />
 
                         <include layout="@layout/life_index_layout" />
 
-                        <include layout="@layout/disaster_early_warning_layout" />
+                        <include
+                            android:id="@+id/disaster_early_warning_layout"
+                            layout="@layout/disaster_early_warning_layout" />
 
                     </LinearLayout>
 
