@@ -3,8 +3,10 @@ package com.xql.weather;
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.util.Log;
+import android.view.View;
 
 import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -34,6 +36,7 @@ import com.qweather.sdk.bean.weather.WeatherNowBean;
 import com.xql.annotation.BindPath;
 import com.xql.basic.activity.BaseActivity;
 import com.xql.common.LineChartManager;
+import com.xql.weather.adapter.LifeIndexAdapter;
 import com.xql.weather.databinding.ActivityWeatherBinding;
 import com.xql.weather.vm.WeatherVM;
 import com.yanzhenjie.permission.runtime.Permission;
@@ -45,6 +48,9 @@ import java.util.List;
 
 @BindPath(key = "weather/weather")
 public class WeatherActivity extends BaseActivity<ActivityWeatherBinding, WeatherVM> {
+    //生活指数需要的声明
+    private LifeIndexAdapter lifeIndexAdapter;
+    private List<IndicesBean.DailyBean> dailyBeans = new ArrayList<>();
     //定位需要的声明
     private AMapLocationClient mLocationClient = null;//定位发起端
     private AMapLocationClientOption mLocationOption = null;//定位参数
@@ -54,8 +60,6 @@ public class WeatherActivity extends BaseActivity<ActivityWeatherBinding, Weathe
     private String loction;
     //和风天气城市id
     private String districtId;
-    //温度List
-    private List<Entry> entries = new ArrayList<>();
 
     @Override
     protected int layoutId() {
@@ -72,7 +76,7 @@ public class WeatherActivity extends BaseActivity<ActivityWeatherBinding, Weathe
         /**
          * MpAndroidchart折线图
          */
-//        MpAndroidchart();
+        //        MpAndroidchart();
     }
 
 
@@ -104,7 +108,7 @@ public class WeatherActivity extends BaseActivity<ActivityWeatherBinding, Weathe
             mLocationClient.startLocation();
         } else {
             ToastUtils.showLong("您没有授权将无法使用天气功能");
-            showLoading();
+            hideLoading();
         }
 
     }
@@ -125,28 +129,34 @@ public class WeatherActivity extends BaseActivity<ActivityWeatherBinding, Weathe
      * GEOAPI获取城市id
      */
     private void GeoAPI() {
+        Log.e(TAG, "GeoAPI: " + loction);
         mViewModel.getGeo(WeatherActivity.this, "大东区").observe(WeatherActivity.this, new Observer<GeoBean>() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onChanged(GeoBean geoBean) {
                 mBinding.cityTitle.setText(city + loction);
-                Log.e(TAG, "GeoAPI: " + geoBean.getLocationBean().get(0).getId());
-                districtId = geoBean.getLocationBean().get(0).getId();
-                //实况天气
-                WeatherNow();
-                //24小时预报
-                Weather24Hourly();
-                //生活指数
-                Indices1D();
-                //日出日落
-                SunToday();
-                //月升月落月相
-                MoonToday();
-                //空气质量
-                AirNow();
-                //灾害预警
-                Warning();
-                hideLoading();
+                if (geoBean.getLocationBean() != null) {
+                    Log.e(TAG, "GeoAPI: " + geoBean.getLocationBean().get(0).getId());
+                    districtId = geoBean.getLocationBean().get(0).getId();
+                    //实况天气
+                    WeatherNow();
+                    //24小时预报
+                    Weather24Hourly();
+                    //生活指数
+                    Indices1D();
+                    //日出日落
+                    SunToday();
+                    //月升月落月相
+                    MoonToday();
+                    //空气质量
+                    AirNow();
+                    //灾害预警
+                    Warning();
+                    hideLoading();
+                } else {
+                    hideLoading();
+                }
+
             }
         });
     }
@@ -155,15 +165,14 @@ public class WeatherActivity extends BaseActivity<ActivityWeatherBinding, Weathe
      * 获取24小时预报
      */
     private void Weather24Hourly() {
-        mViewModel.getWeather24Hourly(WeatherActivity.this,districtId).observe(WeatherActivity.this, new Observer<WeatherHourlyBean>() {
+        mViewModel.getWeather24Hourly(WeatherActivity.this, districtId).observe(WeatherActivity.this, new Observer<WeatherHourlyBean>() {
             @Override
             public void onChanged(WeatherHourlyBean weatherHourlyBean) {
                 String s = GsonUtils.toJson(weatherHourlyBean);
                 Log.e(TAG, "24小时预报: " + s);
-                new LineChartManager(mBinding.lineChart, entries);
-                for (int i = 0; i < 24; i++) {
-                    entries.add(new Entry(i, (float) (Math.random()) * 80));
-                }
+
+                new LineChartManager(mBinding.lineChart, weatherHourlyBean);
+
             }
         });
     }
@@ -172,22 +181,31 @@ public class WeatherActivity extends BaseActivity<ActivityWeatherBinding, Weathe
      * 获取灾害预警
      */
     private void Warning() {
-        mViewModel.getWarning(WeatherActivity.this,districtId).observe(WeatherActivity.this, new Observer<WarningBean>() {
+        mViewModel.getWarning(WeatherActivity.this, districtId).observe(WeatherActivity.this, new Observer<WarningBean>() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onChanged(WarningBean warningBean) {
                 String s = GsonUtils.toJson(warningBean);
                 Log.e(TAG, "灾害预警: " + s);
-                String PubTime = warningBean.getWarningList().get(0).getPubTime().substring(0,10) + " " + warningBean.getWarningList().get(0).getPubTime().substring(11,16);
-                String startTime = warningBean.getWarningList().get(0).getStartTime().substring(0,10) + " " + warningBean.getWarningList().get(0).getPubTime().substring(11,16);
-                String endTime = warningBean.getWarningList().get(0).getEndTime().substring(0,10) + " " + warningBean.getWarningList().get(0).getPubTime().substring(11,16);
-                mBinding.disasterEarlyWarningLayout.pubTimeTv.setText(PubTime);
-                mBinding.disasterEarlyWarningLayout.warnTitleTv.setText(warningBean.getWarningList().get(0).getTitle() + "");
-                mBinding.disasterEarlyWarningLayout.startTimeTv.setText(startTime);
-                mBinding.disasterEarlyWarningLayout.endTimeTv.setText(endTime);
-                mBinding.disasterEarlyWarningLayout.levelTv.setText(warningBean.getWarningList().get(0).getLevel() + "");
-                mBinding.disasterEarlyWarningLayout.typeNameTv.setText(warningBean.getWarningList().get(0).getTypeName() + "");
-                mBinding.disasterEarlyWarningLayout.warnTextTv.setText(warningBean.getWarningList().get(0).getText() + "");
+                if (!(warningBean.getWarningList().toString().equals("[]"))) {
+                    mBinding.disasterEarlyWarningLayout.diasaterLl.setVisibility(View.VISIBLE);
+                    mBinding.disasterEarlyWarningLayout.zwsjImg.setVisibility(View.GONE);
+                    String PubTime = warningBean.getWarningList().get(0).getPubTime().substring(0, 10) + " " + warningBean.getWarningList().get(0).getPubTime().substring(11, 16);
+                    String startTime = warningBean.getWarningList().get(0).getStartTime().substring(0, 10) + " " + warningBean.getWarningList().get(0).getPubTime().substring(11, 16);
+                    String endTime = warningBean.getWarningList().get(0).getEndTime().substring(0, 10) + " " + warningBean.getWarningList().get(0).getPubTime().substring(11, 16);
+                    mBinding.disasterEarlyWarningLayout.pubTimeTv.setText(PubTime);
+                    mBinding.disasterEarlyWarningLayout.warnTitleTv.setText(warningBean.getWarningList().get(0).getTitle() + "");
+                    mBinding.disasterEarlyWarningLayout.startTimeTv.setText(startTime);
+                    mBinding.disasterEarlyWarningLayout.endTimeTv.setText(endTime);
+                    mBinding.disasterEarlyWarningLayout.levelTv.setText(warningBean.getWarningList().get(0).getLevel() + "");
+                    mBinding.disasterEarlyWarningLayout.typeNameTv.setText(warningBean.getWarningList().get(0).getTypeName() + "");
+                    mBinding.disasterEarlyWarningLayout.warnTextTv.setText(warningBean.getWarningList().get(0).getText() + "");
+                } else {
+                    mBinding.disasterEarlyWarningLayout.diasaterLl.setVisibility(View.GONE);
+                    mBinding.disasterEarlyWarningLayout.zwsjImg.setVisibility(View.VISIBLE);
+//                    ToastUtils.showLong("灾害预警数据未刷新");
+                }
+
             }
         });
     }
@@ -279,6 +297,11 @@ public class WeatherActivity extends BaseActivity<ActivityWeatherBinding, Weathe
             public void onChanged(IndicesBean indicesBean) {
                 String s = GsonUtils.toJson(indicesBean);
                 Log.e(TAG, "生活指数: " + s);
+                dailyBeans = indicesBean.getDailyList();
+
+                lifeIndexAdapter = new LifeIndexAdapter(WeatherActivity.this,dailyBeans,R.layout.item_life_index);
+                mBinding.lifeIndexLayout.lifeRv.setLayoutManager(new LinearLayoutManager(WeatherActivity.this));
+                mBinding.lifeIndexLayout.lifeRv.setAdapter(lifeIndexAdapter);
             }
         });
     }
@@ -286,7 +309,7 @@ public class WeatherActivity extends BaseActivity<ActivityWeatherBinding, Weathe
 
     @Override
     protected void initData() {
-
+        mBinding.lifeIndexLayout.lifeRv.setNestedScrollingEnabled( false); //禁止recyclerView嵌套滑动
     }
 
     @Override

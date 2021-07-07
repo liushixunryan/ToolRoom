@@ -24,7 +24,6 @@ import java.util.List;
 @BindPath(key = "main/main")
 public class MainActivity extends BaseActivity<ActivityMainBinding, MainVM> {
     //判断是否点击二次返回键
-
     private Boolean isExit = false;
 
     private List<FunctionBean> mFunctionBean = new ArrayList<>();
@@ -70,7 +69,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainVM> {
                         ARouter.getInstance().jumpActivity("constellation/constellation", null);
                         break;
                     case 1:
-                        ToastUtils.showLong("dddss");
                         ARouter.getInstance().jumpActivity("weather/weather", null);
                         break;
                 }

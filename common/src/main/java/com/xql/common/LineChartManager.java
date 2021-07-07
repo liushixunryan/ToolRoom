@@ -1,6 +1,7 @@
 package com.xql.common;
 
 import android.graphics.Color;
+import android.util.Log;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
@@ -10,6 +11,9 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.utils.ViewPortHandler;
+import com.qweather.sdk.bean.weather.WeatherHourlyBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +26,21 @@ import java.util.List;
  */
 
 public class LineChartManager {
-    public LineChartManager(LineChart lineChart,List<Entry> entries) {
+    private final String TAG = "sansuiban";
+    List<Entry> entries = new ArrayList<>();
+
+    public LineChartManager(LineChart lineChart, WeatherHourlyBean WeatherHourlyBean) {
+
+        for (int i = 0; i < 24; i++) {
+            int xvalue = Integer.parseInt(WeatherHourlyBean.getHourly().get(i).getFxTime().substring(11,13));
+            int yvalue = Integer.parseInt(WeatherHourlyBean.getHourly().get(i).getTemp());
+//            Log.e(TAG, "LineChartManager: " + yvalue);
+            entries.add(new Entry(xvalue, yvalue));
+        }
+
+
+
+
         //是否显示边框
         lineChart.setDrawBorders(false);
         //得到X轴
@@ -32,10 +50,17 @@ public class LineChartManager {
         //设置X轴坐标之间的最小间隔（因为此图有缩放功能，X轴,Y轴可设置可缩放）
         xAxis.setGranularity(1f);
         //设置X轴的刻度数量 第二个参数表示是否平均分配
-        xAxis.setLabelCount(12, true);
+        xAxis.setLabelCount(8, true);
         //设置X轴的值（最小值、最大值、然后会根据设置的刻度数量自动分配刻度显示）
         xAxis.setAxisMinimum(0f);
         xAxis.setAxisMaximum(23f);
+        //设置X轴文字显示
+//        xAxis.setValueFormatter(new ValueFormatter() {
+//            @Override
+//            public String getFormattedValue(float value) {
+//                return WeatherHourlyBean.getHourly().get(0).getFxTime() + "";
+//            }
+//        });
         //X轴文字颜色
         xAxis.setTextColor(Color.WHITE);
         //X轴网格线颜色
@@ -114,6 +139,7 @@ public class LineChartManager {
         //设置XY轴动画
         lineChart.animateXY(3000, 3000);
 
+
         //一个LineDataSet就是一条线
         LineDataSet lineDataSet = new LineDataSet(entries, "温度");
         //设置value的字体颜色
@@ -121,7 +147,7 @@ public class LineChartManager {
         //设置曲线值的圆点是实心还是空心
         lineDataSet.setDrawCircleHole(false);
         //设置显示值的字体大小
-        lineDataSet.setValueTextSize(9f);
+        lineDataSet.setValueTextSize(10f);
         //线模式为圆滑曲线（默认折线）
         lineDataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
         //设置折线颜色
@@ -138,7 +164,7 @@ public class LineChartManager {
         lineChart.setScaleXEnabled(false);
         lineChart.setScaleYEnabled(false);
         // 设置双指缩放
-        lineChart.setPinchZoom(true);
+        lineChart.setPinchZoom(false);
 
         LineData data = new LineData(lineDataSet);
         lineChart.setData(data);

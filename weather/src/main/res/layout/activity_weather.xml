@@ -64,7 +64,8 @@
                             android:id="@+id/air_quality_layout"
                             layout="@layout/air_quality_layout" />
 
-                        <include layout="@layout/life_index_layout" />
+                        <include layout="@layout/life_index_layout"
+                            android:id="@+id/life_index_layout"/>
 
                         <include
                             android:id="@+id/disaster_early_warning_layout"

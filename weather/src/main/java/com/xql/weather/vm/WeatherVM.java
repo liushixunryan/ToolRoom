@@ -43,6 +43,7 @@ public class WeatherVM extends BaseViewModel {
             @Override
             public void onError(Throwable throwable) {
                 Log.e(TAG, "GeoAPI: " + throwable.getMessage());
+                liveData.postValue(new GeoBean());
             }
 
             @Override
