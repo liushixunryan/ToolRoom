@@ -114,6 +114,14 @@ public abstract class BaseActivity<B extends ViewDataBinding, VM extends BaseVie
             loadingDialog.setMessage(msg).show();
         return loadingDialog;
     }
+    /**
+     * 隐藏等待Dialog
+     */
+    public void hideLoading() {
+        if (loadingDialog != null && loadingDialog.isShowing()) {
+            loadingDialog.dismiss();
+        }
+    }
 
 
     /**
@@ -133,16 +141,6 @@ public abstract class BaseActivity<B extends ViewDataBinding, VM extends BaseVie
             mViewModel = (VM) new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(modelClass);
         }
     }
-
-    /**
-     * 隐藏等待Dialog
-     */
-    public void hideLoading() {
-        if (loadingDialog != null && loadingDialog.isShowing()) {
-            loadingDialog.dismiss();
-        }
-    }
-
 
     /**
      * 初始化布局
@@ -270,7 +268,6 @@ public abstract class BaseActivity<B extends ViewDataBinding, VM extends BaseVie
 
     @Override
     protected void onResume() {
-        super.onResume();
         super.onResume();
         AndPermission.with(context).runtime().permission(Permission.WRITE_EXTERNAL_STORAGE, Permission.ACCESS_COARSE_LOCATION, Permission.READ_EXTERNAL_STORAGE, Permission.ACCESS_FINE_LOCATION).onDenied(permissions -> {
             ToastUtils.showLong("权限获取失败,将退出应用");

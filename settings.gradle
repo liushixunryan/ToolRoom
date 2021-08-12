@@ -1,4 +1,3 @@
-include ':weather'
 include ':loading'
 include ':annotation_compiler'
 include ':annotation'
