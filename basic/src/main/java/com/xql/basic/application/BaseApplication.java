@@ -3,6 +3,8 @@ package com.xql.basic.application;
 import android.app.Application;
 
 import androidx.multidex.MultiDex;
+
+import com.qweather.sdk.view.HeConfig;
 import com.xql.arouter.ARouter;
 
 /**
@@ -21,6 +23,12 @@ public class BaseApplication extends Application {
          */
         //arouter注册
         ARouter.getInstance().init(this);
+        /**
+         * 和风天气
+         */
+        HeConfig.init("HE2107070852471616", "d54750558dd14ba5ad40f47c4058620c");
+        //切换至开发版服务
+        HeConfig.switchToDevService();
 
         /**
          *MultiDex

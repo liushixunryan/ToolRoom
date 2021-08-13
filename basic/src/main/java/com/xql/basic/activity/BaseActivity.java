@@ -15,6 +15,10 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
+import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.xql.basic.viewmodel.BaseViewModel;
 import com.xql.loading.LoadingDialog;
@@ -45,6 +49,9 @@ public abstract class BaseActivity<B extends ViewDataBinding, VM extends BaseVie
     private boolean isShowStatusBar = false;
     //是否允许旋转屏幕
     private boolean isAllowScreenRoate = true;
+    //定位需要的声明
+    protected AMapLocationClient mLocationClient = null;
+    protected AMapLocationClientOption mLocationOption = null;
     public Context context;
 
     @Override
@@ -80,6 +87,11 @@ public abstract class BaseActivity<B extends ViewDataBinding, VM extends BaseVie
         //初始化布局
         mBinding = DataBindingUtil.setContentView(this, layoutId());
         mBinding.setLifecycleOwner(this);
+
+        //初始化定位
+        mLocationClient = new AMapLocationClient(getApplicationContext());//定位发起端
+        //初始化定位参数
+        mLocationOption = new AMapLocationClientOption();//定位参数
         initDialog();
         //创建我们的ViewModel。
         createViewModel();
@@ -87,6 +99,7 @@ public abstract class BaseActivity<B extends ViewDataBinding, VM extends BaseVie
         initView();
         //设置数据
         initData();
+
     }
 
     /**
@@ -114,6 +127,7 @@ public abstract class BaseActivity<B extends ViewDataBinding, VM extends BaseVie
             loadingDialog.setMessage(msg).show();
         return loadingDialog;
     }
+
     /**
      * 隐藏等待Dialog
      */
@@ -122,7 +136,6 @@ public abstract class BaseActivity<B extends ViewDataBinding, VM extends BaseVie
             loadingDialog.dismiss();
         }
     }
-
 
     /**
      * 绑定viewmodel
@@ -185,7 +198,6 @@ public abstract class BaseActivity<B extends ViewDataBinding, VM extends BaseVie
     public void setAllowScreenRoate(boolean allowScreenRoate) {
         isAllowScreenRoate = allowScreenRoate;
     }
-
 
     /**
      * 保证同一按钮在1秒内只会响应一次点击事件
@@ -266,14 +278,51 @@ public abstract class BaseActivity<B extends ViewDataBinding, VM extends BaseVie
         ActivityCollector.removeActivity(this);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+    /**
+     * 高德地图初始化配置
+     */
+    protected void Positioningservice() {
+        boolean granted = PermissionUtils.isGranted(Permission.ACCESS_COARSE_LOCATION, Permission.ACCESS_FINE_LOCATION);
+        if (granted) {
+            //设置定位模式为高精度模式，Battery_Saving为低功耗模式，Device_Sensors是仅设备模式
+            mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+            //设置是否返回地址信息（默认返回地址信息）
+            mLocationOption.setNeedAddress(true);
+            //设置是否只定位一次,默认为false
+            mLocationOption.setOnceLocation(false);
+            //设置是否允许模拟位置,默认为false，不允许模拟位置
+            mLocationOption.setMockEnable(false);
+            //设置定位间隔,单位毫秒,默认为2000ms
+            mLocationOption.setInterval(60000);
+            //给定位客户端对象设置定位参数
+            mLocationClient.setLocationOption(mLocationOption);
+            //启动定位
+            mLocationClient.startLocation();
+        } else {
+            ToastUtils.showLong("您没有授权将无法使用天气功能");
+            hideLoading();
+        }
+
+    }
+
+    /**
+     * 权限申请
+     */
+    private void Requestspermissions() {
         AndPermission.with(context).runtime().permission(Permission.WRITE_EXTERNAL_STORAGE, Permission.ACCESS_COARSE_LOCATION, Permission.READ_EXTERNAL_STORAGE, Permission.ACCESS_FINE_LOCATION).onDenied(permissions -> {
             ToastUtils.showLong("权限获取失败,将退出应用");
             ActivityCollector.finishAll();
         }).onGranted(permissions -> {
+            Positioningservice();
         }).start();
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        /**
+         * 在onStart方法中调用权限申请,可以防止调用两次
+         */
+        Requestspermissions();
     }
 }

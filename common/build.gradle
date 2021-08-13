@@ -35,6 +35,8 @@ android {
 dependencies {
     api rootProject.ext.dependencies.publicImplementation
     api 'com.google.android.material:material:1.1.0'
+    api files('libs\\AMap_Location_V5.4.0_20210723.jar')
+    api files('libs\\QWeather_Public_Android_V4.5.jar')
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
