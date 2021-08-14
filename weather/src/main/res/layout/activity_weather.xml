@@ -28,7 +28,17 @@
             android:layout_width="match_parent"
             android:layout_height="360dp"
             android:layout_below="@+id/air_temperature"
+            android:layout_marginTop="@dimen/permission_dp_20"
             android:background="@drawable/linearlayout_fillet" />
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barChart"
+            android:layout_width="match_parent"
+            android:layout_height="360dp"
+            android:layout_below="@+id/air_temperature"
+            android:layout_marginTop="@dimen/permission_dp_20"
+            android:background="@drawable/linearlayout_fillet"
+            android:visibility="gone" />
 
         <com.qingmei2.library.SlideBottomLayout
             android:id="@+id/slide"
@@ -64,8 +74,9 @@
                             android:id="@+id/air_quality_layout"
                             layout="@layout/air_quality_layout" />
 
-                        <include layout="@layout/life_index_layout"
-                            android:id="@+id/life_index_layout"/>
+                        <include
+                            android:id="@+id/life_index_layout"
+                            layout="@layout/life_index_layout" />
 
                         <include
                             android:id="@+id/disaster_early_warning_layout"

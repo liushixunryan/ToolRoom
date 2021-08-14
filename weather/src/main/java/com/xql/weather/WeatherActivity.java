@@ -20,7 +20,7 @@ import com.qweather.sdk.bean.weather.WeatherHourlyBean;
 import com.qweather.sdk.bean.weather.WeatherNowBean;
 import com.xql.annotation.BindPath;
 import com.xql.basic.activity.BaseActivity;
-import com.xql.common.LineChartManager;
+import com.xql.common.ChartManager;
 import com.xql.weather.adapter.LifeIndexAdapter;
 import com.xql.weather.databinding.ActivityWeatherBinding;
 import com.xql.weather.vm.WeatherVM;
@@ -110,7 +110,10 @@ public class WeatherActivity extends BaseActivity<ActivityWeatherBinding, Weathe
                 String s = GsonUtils.toJson(weatherHourlyBean);
                 Log.e(TAG, "24小时预报: " + s);
 
-                new LineChartManager(mBinding.lineChart, weatherHourlyBean);
+                //折线图
+                new ChartManager().LineChartManager(mBinding.lineChart, weatherHourlyBean);
+                //柱状图
+                //                new ChartManager().BarChartManager(mBinding.barChart, weatherHourlyBean);
 
             }
         });
