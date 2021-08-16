@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <!--数据库名称 -->
+    <dbname value="demo" />
+    <!--数据库版本,如果升级需要手动添加 -->
+    <version value="2" />
+    <!--storage数据库存储路径-->
+<!--    <storage value="LSX/Database" />-->
+    <!--数据库中的表,一个类一个表 -->
+    <list>
+        <mapping class="com.xql.toolroom.db.News"/>
+    </list>
+
+</litepal>

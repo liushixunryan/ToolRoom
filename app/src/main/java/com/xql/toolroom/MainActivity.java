@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.KeyEvent;
+
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.blankj.utilcode.util.ToastUtils;
@@ -55,7 +56,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainVM> {
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         mBinding.functionRv.setLayoutManager(layoutManager);
         mBinding.functionRv.setAdapter(mFunctionAdapter);
-
         onClick();
     }
 

@@ -7,6 +7,8 @@ import androidx.multidex.MultiDex;
 import com.qweather.sdk.view.HeConfig;
 import com.xql.arouter.ARouter;
 
+import org.litepal.LitePal;
+
 /**
  * @Package: com.xql.basic
  * @ClassName: BaseApplication
@@ -18,6 +20,11 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        /**
+         * 初始化LitePal数据库
+         */
+        LitePal.initialize(this);
+
         /**
          * Arouter
          */

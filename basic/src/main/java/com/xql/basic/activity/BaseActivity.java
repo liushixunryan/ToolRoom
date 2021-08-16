@@ -17,13 +17,14 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
-import com.amap.api.location.AMapLocationListener;
 import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.xql.basic.viewmodel.BaseViewModel;
 import com.xql.loading.LoadingDialog;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.runtime.Permission;
+
+import org.litepal.tablemanager.Connector;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
