@@ -64,5 +64,7 @@ dependencies {
     api 'com.github.qingmei2:SlideBottomLayout-Android:1.2.3'
     //图表库
     api 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    //富文本
+    api 'com.github.Gennki:QRichText:v1.0.3'
 
 }
