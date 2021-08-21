@@ -3,12 +3,15 @@
 
     <data>
 
+        <variable
+            name="onClickLister"
+            type="com.xql.note.InputNoteActivity" />
     </data>
 
     <LinearLayout
-        android:background="#F2F2F2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#F2F2F2"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
@@ -43,16 +46,28 @@
         </androidx.appcompat.widget.Toolbar>
 
         <EditText
-            android:textColor="@color/black"
-            android:textSize="25sp"
-            android:textColorHint="@color/gray_text"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
             android:hint="请输入标题"
             android:lines="1"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"/>
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray_text"
+            android:textSize="25sp" />
 
-        <cn.qzb.richeditor.RichEditor
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="50dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_editor"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+        <jp.wasabeef.richeditor.RichEditor
+            android:id="@+id/richeditor"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </LinearLayout>
 </layout>

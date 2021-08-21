@@ -1,5 +1,10 @@
 package com.xql.note;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.util.Log;
+import android.view.View;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.xql.annotation.BindPath;
@@ -22,10 +27,24 @@ public class NoteActivity extends BaseActivity<ActivityNoteBinding, NoteVM> {
         return R.layout.activity_note;
     }
 
+
+    @SuppressLint("NonConstantResourceId")
+
+    public void OnSingleClickListener(View view) {
+        if (view.getId() == R.id.img_addeditornote) {
+            Log.e(TAG, "OnSingleClickListener: ");
+            Intent intent = new Intent(NoteActivity.this, InputNoteActivity.class);
+            startActivity(intent);
+        }
+    }
+
     @Override
     protected void initView() {
+        //点击事件
+        mBinding.setOnClickLister(NoteActivity.this);
+
         noteListBeans = new ArrayList<>();
-        for (int i =0;i<5;i++){
+        for (int i = 0; i < 5; i++) {
             NoteListBean noteListBean = new NoteListBean();
             noteListBean.setId(i);
             noteListBean.setNotetitle("文章标题" + i);

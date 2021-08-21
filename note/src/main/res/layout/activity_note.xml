@@ -2,27 +2,30 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-
+        <variable
+            name="onClickLister"
+            type="com.xql.note.NoteActivity" />
     </data>
 
     <RelativeLayout
-        android:background="#F2F2F2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#F2F2F2">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_notelist"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
         <ImageView
-            android:layout_marginBottom="40dp"
-            android:layout_marginEnd="40dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:id="@+id/img_addnote"
-            android:src="@mipmap/addnote"
+            android:id="@+id/img_addeditornote"
             android:layout_width="60dp"
-            android:layout_height="60dp"/>
+            android:layout_height="60dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="40dp"
+            android:onClick="@{onClickLister.OnSingleClickListener}"
+            android:src="@mipmap/addnote" />
     </RelativeLayout>
 </layout>
