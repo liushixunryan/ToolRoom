@@ -29,7 +29,6 @@ public class NoteActivity extends BaseActivity<ActivityNoteBinding, NoteVM> {
 
 
     @SuppressLint("NonConstantResourceId")
-
     public void OnSingleClickListener(View view) {
         if (view.getId() == R.id.img_addeditornote) {
             Log.e(TAG, "OnSingleClickListener: ");

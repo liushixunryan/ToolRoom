@@ -44,12 +44,6 @@ public abstract class BaseActivity<B extends ViewDataBinding, VM extends BaseVie
     private LoadingDialog loadingDialog;
     public B mBinding;
     public VM mViewModel;
-    //是否显示标题栏
-    private boolean isShowTitle = false;
-    //是否显示状态栏
-    private boolean isShowStatusBar = false;
-    //是否允许旋转屏幕
-    private boolean isAllowScreenRoate = true;
     //定位需要的声明
     protected AMapLocationClient mLocationClient = null;
     protected AMapLocationClientOption mLocationOption = null;
@@ -61,30 +55,7 @@ public abstract class BaseActivity<B extends ViewDataBinding, VM extends BaseVie
         context = this;
         //activityi管理
         ActivityCollector.addActivity(this);
-        if (!isShowTitle) {
-            requestWindowFeature(Window.FEATURE_NO_TITLE);
-        }
-        if (!isShowStatusBar) {
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        }
-        //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-        //如果>=4.4才支持沉浸式
-        //显示上面的导航栏
-        //            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        //显示下面的导航键
-        //            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-        //隐藏状态栏
-        //            getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        //显示状态栏
-        //            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        //        }
 
-        //设置屏幕是否可旋转
-        if (!isAllowScreenRoate) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        } else {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        }
         //初始化布局
         mBinding = DataBindingUtil.setContentView(this, layoutId());
         mBinding.setLifecycleOwner(this);
@@ -172,33 +143,6 @@ public abstract class BaseActivity<B extends ViewDataBinding, VM extends BaseVie
      * 设置数据
      */
     protected abstract void initData();
-
-    /**
-     * 设置是否显示标题栏
-     *
-     * @param showTitle true or false
-     */
-    public void setShowTitle(boolean showTitle) {
-        isShowTitle = showTitle;
-    }
-
-    /**
-     * 设置是否显示状态栏
-     *
-     * @param showStatusBar true or false
-     */
-    public void setShowStatusBar(boolean showStatusBar) {
-        isShowStatusBar = showStatusBar;
-    }
-
-    /**
-     * 是否允许屏幕旋转
-     *
-     * @param allowScreenRoate true or false
-     */
-    public void setAllowScreenRoate(boolean allowScreenRoate) {
-        isAllowScreenRoate = allowScreenRoate;
-    }
 
     /**
      * 保证同一按钮在1秒内只会响应一次点击事件
