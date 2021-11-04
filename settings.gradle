@@ -1,3 +1,4 @@
+include ':news'
 include ':note'
 include ':weather'
 include ':loading'

@@ -29,9 +29,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainVM> {
 
     private List<FunctionBean> mFunctionBean = new ArrayList<>();
     private FunctionAdapter mFunctionAdapter;
-    private final String[] function_name = {"星座运势", "天气查询", "笔记记录"};
-    private final int[] function_img = {R.mipmap.constellation_icon, R.mipmap.weather, R.mipmap.note};
-    private final int[] function_ID = {0, 1, 2};
+    private final String[] function_name = {"星座运势", "天气查询", "笔记记录","新闻资讯"};
+    private final int[] function_img = {R.mipmap.constellation_icon, R.mipmap.weather, R.mipmap.note,R.mipmap.news};
+    private final int[] function_ID = {0, 1, 2,3};
 
     @Override
     protected int layoutId() {
@@ -73,6 +73,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainVM> {
                         break;
                     case 2:
                         ARouter.getInstance().jumpActivity("note/note", null);
+                        break;
+                    case 3:
+                        ARouter.getInstance().jumpActivity("news/news", null);
                         break;
                 }
             }

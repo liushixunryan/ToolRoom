@@ -197,7 +197,6 @@ public abstract class BaseActivity<B extends ViewDataBinding, VM extends BaseVie
          * @param activity 活动
          */
         public static void removeActivity(Activity activity) {
-
             activitys.remove(activity);
         }
 
