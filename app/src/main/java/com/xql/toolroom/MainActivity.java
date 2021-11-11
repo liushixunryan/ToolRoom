@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 
@@ -29,9 +30,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainVM> {
 
     private List<FunctionBean> mFunctionBean = new ArrayList<>();
     private FunctionAdapter mFunctionAdapter;
-    private final String[] function_name = {"星座运势", "天气查询", "笔记记录","新闻资讯"};
-    private final int[] function_img = {R.mipmap.constellation_icon, R.mipmap.weather, R.mipmap.note,R.mipmap.news};
-    private final int[] function_ID = {0, 1, 2,3};
+    private final String[] function_name = {"星座运势", "天气查询", "笔记记录", "新闻资讯"};
+    private final int[] function_img = {R.mipmap.constellation_icon, R.mipmap.weather, R.mipmap.note, R.mipmap.news};
+    private final int[] function_ID = {0, 1, 2, 3};
 
     @Override
     protected int layoutId() {
@@ -54,6 +55,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainVM> {
     protected void initData() {
         mFunctionAdapter = new FunctionAdapter(this, mFunctionBean, R.layout.item_function_layout);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+        //去掉上拉刷新和下拉加载的阴影
+        mBinding.functionRv.setOverScrollMode(View.OVER_SCROLL_NEVER);
         mBinding.functionRv.setLayoutManager(layoutManager);
         mBinding.functionRv.setAdapter(mFunctionAdapter);
         onClick();

@@ -36,15 +36,22 @@ public class NewsInformationActivity extends BaseActivity<ActivityNewsInformatio
 
     @Override
     protected void initView() {
-        mBinding.titleTv.setText("运势详情");
+        mBinding.titleTv.setText("实时新闻");
         mBinding.backImg.setVisibility(View.VISIBLE);
 
         fragments = new ArrayList<>();
         fragments.add(new TJViewPager());
-//        fragments.add(new TomorrowFragment());
-//        fragments.add(new WeekFragment());
-//        fragments.add(new MonthFragment());
-//        fragments.add(new YearFragment());
+        fragments.add(new TJViewPager());
+        fragments.add(new TJViewPager());
+        fragments.add(new TJViewPager());
+        fragments.add(new TJViewPager());
+        fragments.add(new TJViewPager());
+        fragments.add(new TJViewPager());
+        fragments.add(new TJViewPager());
+        fragments.add(new TJViewPager());
+        fragments.add(new TJViewPager());
+        fragments.add(new TJViewPager());
+        fragments.add(new TJViewPager());
 
         MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(NewsInformationActivity.this, fragments);
         //设置的预加载数量      ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT 禁用预加载
@@ -61,12 +68,6 @@ public class NewsInformationActivity extends BaseActivity<ActivityNewsInformatio
 
     @Override
     protected void initData() {
-        mViewModel.getNewsList("top", 1).observe(this, new Observer<TJBean>() {
-            @Override
-            public void onChanged(TJBean tjBean) {
-                String s = GsonUtils.toJson(tjBean);
-                Log.e(TAG, "推薦: " + s);
-            }
-        });
+
     }
 }

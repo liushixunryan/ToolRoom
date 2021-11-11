@@ -2,6 +2,7 @@ package com.xql.constellation.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 
@@ -60,6 +61,8 @@ public class FortuneFragment extends BaseFragment<FragmentFortuneBinding, Fortun
     protected void initData(Context context) {
         mFortuneAdapter = new FortuneAdapter(getActivity(), mFortuneBeans,R.layout.item_fortune_layout);
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 3);
+        //去掉上拉刷新和下拉加载的阴影
+        mBinding.constellationRv.setOverScrollMode(View.OVER_SCROLL_NEVER);
         mBinding.constellationRv.setLayoutManager(layoutManager);
         mBinding.constellationRv.setAdapter(mFortuneAdapter);
 

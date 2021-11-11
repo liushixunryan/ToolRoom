@@ -1,6 +1,7 @@
 package com.xql.basic.application;
 
 import android.app.Application;
+import android.content.Context;
 
 import androidx.multidex.MultiDex;
 
@@ -17,9 +18,15 @@ import org.litepal.LitePal;
  */
 
 public class BaseApplication extends Application {
+    private static Context context;
     @Override
     public void onCreate() {
         super.onCreate();
+
+        /**
+         * 设置全局context
+         */
+        context = getApplicationContext();
         /**
          * 初始化LitePal数据库
          */
@@ -42,5 +49,9 @@ public class BaseApplication extends Application {
          */
         // Dex文件超出限制
         MultiDex.install(this);
+    }
+    //返回
+    public static Context getContextObject(){
+        return context;
     }
 }

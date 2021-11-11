@@ -11,6 +11,9 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.xql.basic.application.BaseApplication;
+
 public class BaseHolder extends RecyclerView.ViewHolder {
     View itemView;
     SparseArray<View> views;//存放itemview中的子view
@@ -56,11 +59,10 @@ public class BaseHolder extends RecyclerView.ViewHolder {
         return this;
     }
 
-    //    public BaseHolder setImageView(int imagViewId, String url) {
-    //        GlideApp.with(AIApplication.mContext).load(url).error(R.drawable.ic_default).placeholder(R.drawable.ic_default)
-    //                .transform(new GlideRoundTransform()).into((ImageView) getView(imagViewId));
-    //        return this;
-    //    }
+        public BaseHolder setImageView(int imagViewId, String url) {
+            Glide.with(BaseApplication.getContextObject()).load(url).into((ImageView) getView(imagViewId));
+            return this;
+        }
 
     public BaseHolder setImageView(int imagViewId, int resId) {
         ((ImageView) getView(imagViewId)).setImageResource(resId);

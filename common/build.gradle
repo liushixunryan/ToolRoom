@@ -66,5 +66,7 @@ dependencies {
     api 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     //富文本
     api 'jp.wasabeef:richeditor-android:2.0.0'
+    //下拉刷新控件
+    api "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
 }

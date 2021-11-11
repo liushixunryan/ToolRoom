@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".NewsInformationActivity">
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_constellation"
             android:layout_width="match_parent"
@@ -40,13 +41,16 @@
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
 
+        <!--        app:tabMode="scrollable" fixed 为固定模式，scrollable 为可滚动模式-->
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/mytab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabMode="fixed"
-            app:tabSelectedTextColor="#ff0000"
-            app:tabTextColor="#000000" />
+            android:background="#006AD1"
+            app:tabIndicatorColor="#FF4E7A"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="#ffffff"
+            app:tabTextColor="#ffffff" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/mViewpager"

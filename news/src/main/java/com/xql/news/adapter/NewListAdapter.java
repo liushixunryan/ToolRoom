@@ -1,27 +1,49 @@
 package com.xql.news.adapter;
 
 import android.content.Context;
+import android.view.View;
 
 import com.xql.basic.adapter.BaseAdapter;
 import com.xql.basic.adapter.BaseHolder;
+import com.xql.news.R;
 import com.xql.news.bean.TJBean;
+import com.xql.news.interfaces.IOnNewsListener;
 
 import java.util.List;
 
 /**
  * @ClassName: NewListAdapter
- * @Description: java类作用描述
+ * @Description: 新闻列表adapter
  * @CreateDate: 2021/11/4 16:20
  * @UpdateUser: RyanLiu
  */
 
-public class NewListAdapter extends BaseAdapter<TJBean> {
-    public NewListAdapter(Context context, List<TJBean> datas, int layoutId) {
+public class NewListAdapter extends BaseAdapter<TJBean.ResultBean.DataBean> {
+    //实例化点击新闻详情接口
+    private IOnNewsListener onNewsListener;
+
+
+    public void setiOnNewListener(IOnNewsListener onNewListener){
+        onNewsListener = onNewListener;
+    }
+
+
+    public NewListAdapter(Context context, List<TJBean.ResultBean.DataBean> datas, int layoutId) {
         super(context, datas, layoutId);
     }
 
-    @Override
-    protected void onBindData(BaseHolder baseHolder, TJBean tjBean, int postion) {
 
+    @Override
+    protected void onBindData(BaseHolder baseHolder, TJBean.ResultBean.DataBean dataBean, int postion) {
+        baseHolder.setText(R.id.newsTitle,dataBean.getTitle());
+        baseHolder.setText(R.id.newsSource,dataBean.getAuthor_name());
+        baseHolder.setText(R.id.newsTime,dataBean.getDate());
+        baseHolder.setImageView(R.id.newsImg,dataBean.getThumbnail_pic_s());
+        baseHolder.setOnclickListioner(R.id.newsDetail, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onNewsListener.OnNewsItemClick(postion,dataBean.getUniquekey());
+            }
+        });
     }
 }
