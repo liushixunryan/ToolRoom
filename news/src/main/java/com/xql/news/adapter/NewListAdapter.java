@@ -6,7 +6,7 @@ import android.view.View;
 import com.xql.basic.adapter.BaseAdapter;
 import com.xql.basic.adapter.BaseHolder;
 import com.xql.news.R;
-import com.xql.news.bean.TJBean;
+import com.xql.news.bean.NewsListBean;
 import com.xql.news.interfaces.IOnNewsListener;
 
 import java.util.List;
@@ -18,7 +18,7 @@ import java.util.List;
  * @UpdateUser: RyanLiu
  */
 
-public class NewListAdapter extends BaseAdapter<TJBean.ResultBean.DataBean> {
+public class NewListAdapter extends BaseAdapter<NewsListBean.ResultBean.DataBean> {
     //实例化点击新闻详情接口
     private IOnNewsListener onNewsListener;
 
@@ -28,13 +28,13 @@ public class NewListAdapter extends BaseAdapter<TJBean.ResultBean.DataBean> {
     }
 
 
-    public NewListAdapter(Context context, List<TJBean.ResultBean.DataBean> datas, int layoutId) {
+    public NewListAdapter(Context context, List<NewsListBean.ResultBean.DataBean> datas, int layoutId) {
         super(context, datas, layoutId);
     }
 
 
     @Override
-    protected void onBindData(BaseHolder baseHolder, TJBean.ResultBean.DataBean dataBean, int postion) {
+    protected void onBindData(BaseHolder baseHolder, NewsListBean.ResultBean.DataBean dataBean, int postion) {
         baseHolder.setText(R.id.newsTitle,dataBean.getTitle());
         baseHolder.setText(R.id.newsSource,dataBean.getAuthor_name());
         baseHolder.setText(R.id.newsTime,dataBean.getDate());

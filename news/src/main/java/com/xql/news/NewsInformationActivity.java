@@ -1,20 +1,16 @@
 package com.xql.news;
 
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.blankj.utilcode.util.GsonUtils;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.xql.annotation.BindPath;
 import com.xql.basic.activity.BaseActivity;
 import com.xql.common.MyFragmentPagerAdapter;
-import com.xql.news.bean.TJBean;
 import com.xql.news.databinding.ActivityNewsInformationBinding;
 import com.xql.news.viewpager.TJViewPager;
 import com.xql.news.vm.NewsInformationVM;

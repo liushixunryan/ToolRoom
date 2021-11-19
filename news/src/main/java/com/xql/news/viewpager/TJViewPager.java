@@ -1,9 +1,6 @@
 package com.xql.news.viewpager;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.view.View;
 
@@ -15,7 +12,7 @@ import com.blankj.utilcode.util.GsonUtils;
 import com.xql.basic.fragment.BaseFragment;
 import com.xql.news.R;
 import com.xql.news.adapter.NewListAdapter;
-import com.xql.news.bean.TJBean;
+import com.xql.news.bean.NewsListBean;
 import com.xql.news.databinding.ViewpagerNewslistLayoutBinding;
 import com.xql.news.interfaces.IOnNewsListener;
 import com.xql.news.vm.NewsInformationVM;
@@ -25,14 +22,14 @@ import java.util.List;
 
 /**
  * @ClassName: TJViewPager
- * @Description: 新闻列表adapter
+ * @Description: 新闻推荐页Viewpager
  * @CreateDate: 2021/11/4 16:12
  * @UpdateUser: RyanLiu
  */
 
 public class TJViewPager extends BaseFragment<ViewpagerNewslistLayoutBinding, NewsInformationVM> {
     private NewListAdapter newListAdapter;
-    private List<TJBean.ResultBean.DataBean> tjBeans;
+    private List<NewsListBean.ResultBean.DataBean> tjBeans;
 
     @Override
     protected int layoutId() {
@@ -50,13 +47,13 @@ public class TJViewPager extends BaseFragment<ViewpagerNewslistLayoutBinding, Ne
 
     //获取推荐列表的数据接口
     private void getTJData() {
-        mViewModel.getNewsList("top", 1).observe(this, new Observer<TJBean>() {
+        mViewModel.getNewsList("top", 1).observe(this, new Observer<NewsListBean>() {
             @Override
-            public void onChanged(TJBean tjBean) {
-                String s = GsonUtils.toJson(tjBean);
+            public void onChanged(NewsListBean newsListBean) {
+                String s = GsonUtils.toJson(newsListBean);
                 Log.e(TAG, "推薦: " + s);
                 //赋值给新闻列表
-                tjBeans.addAll(tjBean.getResult().getData());
+                tjBeans.addAll(newsListBean.getResult().getData());
                 newListAdapter.notifyDataSetChanged();
                 if (mBinding.swiperLayout.isRefreshing()) {
                     mBinding.swiperLayout.setRefreshing(false);

@@ -9,7 +9,7 @@ import java.util.List;
  * @UpdateUser: RyanLiu
  */
 
-public class TJBean {
+public class NewsListBean {
 
     private String reason;
     private ResultBean result;

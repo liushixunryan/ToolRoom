@@ -1,6 +1,6 @@
 package com.xql.news.network;
 
-import com.xql.news.bean.TJBean;
+import com.xql.news.bean.NewsListBean;
 
 import io.reactivex.Observable;
 import retrofit2.http.POST;
@@ -19,6 +19,6 @@ public interface APIService {
 
     //获取新闻类别集合
     @POST("index?type=top&key=" + key)
-    Observable<TJBean> getNewsList(@Query("type") String type, @Query("page") int page, @Query("page_size") int page_size, @Query("is_filter") int is_filter);
+    Observable<NewsListBean> getNewsList(@Query("type") String type, @Query("page") int page, @Query("page_size") int page_size, @Query("is_filter") int is_filter);
 
 }
