@@ -12,6 +12,7 @@ import com.xql.annotation.BindPath;
 import com.xql.basic.activity.BaseActivity;
 import com.xql.common.MyFragmentPagerAdapter;
 import com.xql.news.databinding.ActivityNewsInformationBinding;
+import com.xql.news.viewpager.GNViewPager;
 import com.xql.news.viewpager.TJViewPager;
 import com.xql.news.vm.NewsInformationVM;
 
@@ -37,7 +38,7 @@ public class NewsInformationActivity extends BaseActivity<ActivityNewsInformatio
 
         fragments = new ArrayList<>();
         fragments.add(new TJViewPager());
-        fragments.add(new TJViewPager());
+        fragments.add(new GNViewPager());
         fragments.add(new TJViewPager());
         fragments.add(new TJViewPager());
         fragments.add(new TJViewPager());

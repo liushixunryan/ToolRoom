@@ -25,16 +25,16 @@ import java.util.List;
 
 /**
  * @ClassName: GWViewPager
- * @Description: 新闻国外页ViewPager
+ * @Description: 新闻国内页ViewPager
  * @CreateDate: 2021/11/11 13:08
  * @UpdateUser: RyanLiu
  */
 
-public class GWViewPager extends BaseFragment<ViewpagerNewslistLayoutBinding, NewsInformationVM> {
+public class GNViewPager extends BaseFragment<ViewpagerNewslistLayoutBinding, NewsInformationVM> {
     private NewListAdapter newListAdapter;
     private List<NewsListBean.ResultBean.DataBean> gwBeans;
     //获取新闻列表类型
-    private String type = "guoji";
+    private String type = "guonei";
     //获取当前是哪一页
     private int page = 1;
 
@@ -61,7 +61,7 @@ public class GWViewPager extends BaseFragment<ViewpagerNewslistLayoutBinding, Ne
             @Override
             public void onChanged(NewsListBean newsListBean) {
                 String s = GsonUtils.toJson(newsListBean);
-                Log.e(TAG, "国外: " + s);
+                Log.e(TAG, "国内: " + s);
                 //复制给新新闻列表
                 gwBeans.addAll(newsListBean.getResult().getData());
                 newListAdapter.notifyDataSetChanged();
