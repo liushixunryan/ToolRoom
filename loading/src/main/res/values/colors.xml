@@ -11,4 +11,6 @@
     <color name="blue_bg">#0290ff</color>
     <color name="defalut_text">#333333</color>
     <color name="gray_text">#b1b1b1</color>
+    <color name="data_text">#66667F</color>
+
 </resources>

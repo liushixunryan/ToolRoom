@@ -3,8 +3,8 @@
     package="com.xql.news">
 
     <application>
+        <activity android:name=".NewDetailActivity" />
         <activity android:name=".NewsInformationActivity" />
-
     </application>
 
 </manifest>

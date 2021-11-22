@@ -12,8 +12,10 @@ import com.xql.annotation.BindPath;
 import com.xql.basic.activity.BaseActivity;
 import com.xql.common.MyFragmentPagerAdapter;
 import com.xql.news.databinding.ActivityNewsInformationBinding;
+import com.xql.news.viewpager.GJViewPager;
 import com.xql.news.viewpager.GNViewPager;
 import com.xql.news.viewpager.TJViewPager;
+import com.xql.news.viewpager.YLViewPager;
 import com.xql.news.vm.NewsInformationVM;
 
 import java.util.ArrayList;
@@ -22,7 +24,7 @@ import java.util.List;
 @BindPath(key = "news/news")
 public class NewsInformationActivity extends BaseActivity<ActivityNewsInformationBinding, NewsInformationVM> {
 
-    private String[] title = new String[]{"推荐", "国内", "国际", "娱乐", "体育","军事","科技","财经","时尚","游戏","汽车","健康"};
+    private String[] title = new String[]{"推荐", "国内", "国际", "娱乐", "体育", "军事", "科技", "财经", "时尚", "游戏", "汽车", "健康"};
     private List<Fragment> fragments;
     private TabLayoutMediator mediator;
 
@@ -39,8 +41,8 @@ public class NewsInformationActivity extends BaseActivity<ActivityNewsInformatio
         fragments = new ArrayList<>();
         fragments.add(new TJViewPager());
         fragments.add(new GNViewPager());
-        fragments.add(new TJViewPager());
-        fragments.add(new TJViewPager());
+        fragments.add(new GJViewPager());
+        fragments.add(new YLViewPager());
         fragments.add(new TJViewPager());
         fragments.add(new TJViewPager());
         fragments.add(new TJViewPager());

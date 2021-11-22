@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,17 +25,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @ClassName: GWViewPager
- * @Description: 新闻国内页ViewPager
- * @CreateDate: 2021/11/11 13:08
+ * @ClassName: GJViewPager
+ * @Description: 新闻国际页ViewPager
+ * @CreateDate: 2021/11/20 11:21
  * @UpdateUser: RyanLiu
  */
 
-public class GNViewPager extends BaseFragment<ViewpagerNewslistLayoutBinding, NewsInformationVM> {
+public class GJViewPager extends BaseFragment<ViewpagerNewslistLayoutBinding, NewsInformationVM> {
     private NewListAdapter newListAdapter;
-    private List<NewsListBean.ResultBean.DataBean> gwBeans;
+    private List<NewsListBean.ResultBean.DataBean> gjBeans;
     //获取新闻列表类型
-    private String type = "guonei";
+    private String type = "guoji";
     //获取当前是哪一页
     private int page = 1;
 
@@ -48,7 +47,7 @@ public class GNViewPager extends BaseFragment<ViewpagerNewslistLayoutBinding, Ne
     @Override
     protected void initView(ViewpagerNewslistLayoutBinding bindview) {
         //实例化
-        gwBeans = new ArrayList<>();
+        gjBeans = new ArrayList<>();
         getGWData(type, page);
     }
 
@@ -65,7 +64,7 @@ public class GNViewPager extends BaseFragment<ViewpagerNewslistLayoutBinding, Ne
                 String s = GsonUtils.toJson(newsListBean);
                 Log.e(TAG, "国内: " + s);
                 //复制给新新闻列表
-                gwBeans.addAll(newsListBean.getResult().getData());
+                gjBeans.addAll(newsListBean.getResult().getData());
                 newListAdapter.notifyDataSetChanged();
                 if (mBinding.swiperLayout.isRefreshing()) {
                     mBinding.swiperLayout.setRefreshing(false);
@@ -76,7 +75,7 @@ public class GNViewPager extends BaseFragment<ViewpagerNewslistLayoutBinding, Ne
 
     @Override
     protected void initData(Context context) {
-        newListAdapter = new NewListAdapter(getActivity(), gwBeans, R.layout.item_newslist);
+        newListAdapter = new NewListAdapter(getActivity(), gjBeans, R.layout.item_newslist);
         //去掉上拉刷新和下拉加载的阴影
         mBinding.newslist.setOverScrollMode(View.OVER_SCROLL_NEVER);
         //recyclerview 设置布局
@@ -100,7 +99,7 @@ public class GNViewPager extends BaseFragment<ViewpagerNewslistLayoutBinding, Ne
             public void onRefresh() {
                 page = 1;
                 //每次一清空一次数据
-                gwBeans.clear();
+                gjBeans.clear();
                 getGWData(type, page);
             }
         });
@@ -128,7 +127,7 @@ public class GNViewPager extends BaseFragment<ViewpagerNewslistLayoutBinding, Ne
                     if (lastVisibleItem == (totalItemCount - 1) && isSlidingToLast) {
                         //滚动到底部加载更多功能的代码
                         page = page + 1;
-                        if (page >50) {
+                        if (page > 50) {
                             ToastUtils.showLong("没有更多数据了");
                         } else {
                             getGWData(type, page);
@@ -163,7 +162,9 @@ public class GNViewPager extends BaseFragment<ViewpagerNewslistLayoutBinding, Ne
                 Bundle bundle = new Bundle();
                 bundle.putString("uniquekey", ID);
                 ARouter.getInstance().jumpActivity("newsdetail/newsdetail", bundle);
+
             }
         });
     }
 }
+
