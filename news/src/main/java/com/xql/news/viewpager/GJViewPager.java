@@ -33,7 +33,7 @@ import java.util.List;
 
 public class GJViewPager extends BaseFragment<ViewpagerNewslistLayoutBinding, NewsInformationVM> {
     private NewListAdapter newListAdapter;
-    private List<NewsListBean.ResultBean.DataBean> gjBeans;
+    private List<NewsListBean.ResultBean.DataBean> giBeans;
     //获取新闻列表类型
     private String type = "guoji";
     //获取当前是哪一页
@@ -47,7 +47,7 @@ public class GJViewPager extends BaseFragment<ViewpagerNewslistLayoutBinding, Ne
     @Override
     protected void initView(ViewpagerNewslistLayoutBinding bindview) {
         //实例化
-        gjBeans = new ArrayList<>();
+        giBeans = new ArrayList<>();
         getGWData(type, page);
     }
 
@@ -64,7 +64,7 @@ public class GJViewPager extends BaseFragment<ViewpagerNewslistLayoutBinding, Ne
                 String s = GsonUtils.toJson(newsListBean);
                 Log.e(TAG, "国内: " + s);
                 //复制给新新闻列表
-                gjBeans.addAll(newsListBean.getResult().getData());
+                giBeans.addAll(newsListBean.getResult().getData());
                 newListAdapter.notifyDataSetChanged();
                 if (mBinding.swiperLayout.isRefreshing()) {
                     mBinding.swiperLayout.setRefreshing(false);
@@ -75,7 +75,7 @@ public class GJViewPager extends BaseFragment<ViewpagerNewslistLayoutBinding, Ne
 
     @Override
     protected void initData(Context context) {
-        newListAdapter = new NewListAdapter(getActivity(), gjBeans, R.layout.item_newslist);
+        newListAdapter = new NewListAdapter(getActivity(), giBeans, R.layout.item_newslist);
         //去掉上拉刷新和下拉加载的阴影
         mBinding.newslist.setOverScrollMode(View.OVER_SCROLL_NEVER);
         //recyclerview 设置布局
@@ -99,7 +99,7 @@ public class GJViewPager extends BaseFragment<ViewpagerNewslistLayoutBinding, Ne
             public void onRefresh() {
                 page = 1;
                 //每次一清空一次数据
-                gjBeans.clear();
+                giBeans.clear();
                 getGWData(type, page);
             }
         });

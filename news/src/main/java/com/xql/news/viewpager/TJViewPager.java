@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -19,6 +20,7 @@ import com.xql.news.adapter.NewListAdapter;
 import com.xql.news.bean.NewsListBean;
 import com.xql.news.databinding.ViewpagerNewslistLayoutBinding;
 import com.xql.news.interfaces.IOnNewsListener;
+import com.xql.news.vm.NewDetailVM;
 import com.xql.news.vm.NewsInformationVM;
 
 import java.util.ArrayList;
@@ -33,7 +35,7 @@ import java.util.List;
 
 public class TJViewPager extends BaseFragment<ViewpagerNewslistLayoutBinding, NewsInformationVM> {
     private NewListAdapter newListAdapter;
-    private List<NewsListBean.ResultBean.DataBean> gwBeans;
+    private List<NewsListBean.ResultBean.DataBean> dataBeans;
     //获取新闻列表类型
     private String type = "top";
     //获取当前是哪一页
@@ -47,24 +49,24 @@ public class TJViewPager extends BaseFragment<ViewpagerNewslistLayoutBinding, Ne
     @Override
     protected void initView(ViewpagerNewslistLayoutBinding bindview) {
         //实例化
-        gwBeans = new ArrayList<>();
-        getGWData(type, page);
+        dataBeans = new ArrayList<>();
+        getData(type, page);
     }
 
     /**
-     * 推荐页新闻列表
+     * 国外页新闻列表
      *
      * @param type
      * @param pages
      */
-    private void getGWData(String type, int pages) {
+    private void getData(String type, int pages) {
         mViewModel.getNewsList(type, pages).observe(this, new Observer<NewsListBean>() {
             @Override
             public void onChanged(NewsListBean newsListBean) {
                 String s = GsonUtils.toJson(newsListBean);
                 Log.e(TAG, "推荐: " + s);
                 //复制给新新闻列表
-                gwBeans.addAll(newsListBean.getResult().getData());
+                dataBeans.addAll(newsListBean.getResult().getData());
                 newListAdapter.notifyDataSetChanged();
                 if (mBinding.swiperLayout.isRefreshing()) {
                     mBinding.swiperLayout.setRefreshing(false);
@@ -72,9 +74,10 @@ public class TJViewPager extends BaseFragment<ViewpagerNewslistLayoutBinding, Ne
             }
         });
     }
+
     @Override
     protected void initData(Context context) {
-        newListAdapter = new NewListAdapter(getActivity(), gwBeans, R.layout.item_newslist);
+        newListAdapter = new NewListAdapter(getActivity(), dataBeans, R.layout.item_newslist);
         //去掉上拉刷新和下拉加载的阴影
         mBinding.newslist.setOverScrollMode(View.OVER_SCROLL_NEVER);
         //recyclerview 设置布局
@@ -88,6 +91,7 @@ public class TJViewPager extends BaseFragment<ViewpagerNewslistLayoutBinding, Ne
         //下拉刷新
         downRefresh();
     }
+
     /**
      * 下拉刷新
      */
@@ -97,8 +101,8 @@ public class TJViewPager extends BaseFragment<ViewpagerNewslistLayoutBinding, Ne
             public void onRefresh() {
                 page = 1;
                 //每次一清空一次数据
-                gwBeans.clear();
-                getGWData(type, page);
+                dataBeans.clear();
+                getData(type, page);
             }
         });
     }
@@ -125,10 +129,10 @@ public class TJViewPager extends BaseFragment<ViewpagerNewslistLayoutBinding, Ne
                     if (lastVisibleItem == (totalItemCount - 1) && isSlidingToLast) {
                         //滚动到底部加载更多功能的代码
                         page = page + 1;
-                        if (page >50) {
+                        if (page > 50) {
                             ToastUtils.showLong("没有更多数据了");
                         } else {
-                            getGWData(type, page);
+                            getData(type, page);
                         }
                     }
                 }
@@ -157,9 +161,6 @@ public class TJViewPager extends BaseFragment<ViewpagerNewslistLayoutBinding, Ne
             @Override
             public void OnNewsItemClick(int position, String ID) {
                 Log.e(TAG, "OnNewsItemClick: " + ID);
-                Bundle bundle = new Bundle();
-                bundle.putString("uniquekey", ID);
-                ARouter.getInstance().jumpActivity("newsdetail/newsdetail", bundle);
             }
         });
     }
