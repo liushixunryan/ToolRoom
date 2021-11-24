@@ -62,7 +62,7 @@ public class NewsInformationActivity extends BaseActivity<ActivityNewsInformatio
 
         MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(NewsInformationActivity.this, fragments);
         //设置的预加载数量      ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT 禁用预加载
-        mBinding.mViewpager.setOffscreenPageLimit(ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT);
+        mBinding.mViewpager.setOffscreenPageLimit(5);
         mBinding.mViewpager.setAdapter(adapter);
         mediator = new TabLayoutMediator(mBinding.mytab, mBinding.mViewpager, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
