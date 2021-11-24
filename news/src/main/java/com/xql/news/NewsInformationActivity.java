@@ -15,12 +15,15 @@ import com.xql.news.databinding.ActivityNewsInformationBinding;
 import com.xql.news.viewpager.CJViewPager;
 import com.xql.news.viewpager.GJViewPager;
 import com.xql.news.viewpager.GNViewPager;
+import com.xql.news.viewpager.JKViewPager;
 import com.xql.news.viewpager.JSViewPager;
 import com.xql.news.viewpager.KJViewPager;
+import com.xql.news.viewpager.QCViewPager;
 import com.xql.news.viewpager.SSViewPager;
 import com.xql.news.viewpager.TJViewPager;
 import com.xql.news.viewpager.TYViewPager;
 import com.xql.news.viewpager.YLViewPager;
+import com.xql.news.viewpager.YXViewPager;
 import com.xql.news.vm.NewsInformationVM;
 
 import java.util.ArrayList;
@@ -53,9 +56,9 @@ public class NewsInformationActivity extends BaseActivity<ActivityNewsInformatio
         fragments.add(new KJViewPager());
         fragments.add(new CJViewPager());
         fragments.add(new SSViewPager());
-        fragments.add(new TJViewPager());
-        fragments.add(new TJViewPager());
-        fragments.add(new TJViewPager());
+        fragments.add(new YXViewPager());
+        fragments.add(new QCViewPager());
+        fragments.add(new JKViewPager());
 
         MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(NewsInformationActivity.this, fragments);
         //设置的预加载数量      ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT 禁用预加载

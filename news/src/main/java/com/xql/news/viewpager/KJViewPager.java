@@ -1,6 +1,7 @@
 package com.xql.news.viewpager;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
@@ -11,6 +12,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.xql.arouter.ARouter;
 import com.xql.basic.fragment.BaseFragment;
 import com.xql.news.R;
 import com.xql.news.adapter.NewListAdapter;
@@ -157,6 +159,10 @@ public class KJViewPager extends BaseFragment<ViewpagerNewslistLayoutBinding, Ne
             @Override
             public void OnNewsItemClick(int position, String ID) {
                 Log.e(TAG, "OnNewsItemClick: " + ID);
+                Bundle bundle = new Bundle();
+                bundle.putString("uniquekey", ID);
+                ARouter.getInstance().jumpActivity("newsdetail/newsdetail", bundle);
+
             }
         });
     }

@@ -161,6 +161,10 @@ public class TJViewPager extends BaseFragment<ViewpagerNewslistLayoutBinding, Ne
             @Override
             public void OnNewsItemClick(int position, String ID) {
                 Log.e(TAG, "OnNewsItemClick: " + ID);
+                Bundle bundle = new Bundle();
+                bundle.putString("uniquekey", ID);
+                ARouter.getInstance().jumpActivity("newsdetail/newsdetail", bundle);
+
             }
         });
     }

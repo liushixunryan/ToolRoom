@@ -25,17 +25,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @ClassName: JSViewPager
- * @Description: 新闻军事页Viewpager
- * @CreateDate: 2021/11/24 9:39
+ * @ClassName: QCViewPager
+ * @Description: 新闻汽车页Viewpager
+ * @CreateDate: 2021/11/24 9:58
  * @UpdateUser: RyanLiu
  */
 
-public class JSViewPager extends BaseFragment<ViewpagerNewslistLayoutBinding, NewsInformationVM> {
+public class QCViewPager extends BaseFragment<ViewpagerNewslistLayoutBinding, NewsInformationVM> {
     private NewListAdapter newListAdapter;
     private List<NewsListBean.ResultBean.DataBean> dataBeans;
     //获取新闻列表类型
-    private String type = "junshi";
+    private String type = "qiche";
     //获取当前是哪一页
     private int page = 1;
 
@@ -62,7 +62,7 @@ public class JSViewPager extends BaseFragment<ViewpagerNewslistLayoutBinding, Ne
             @Override
             public void onChanged(NewsListBean newsListBean) {
                 String s = GsonUtils.toJson(newsListBean);
-                Log.e(TAG, "军事: " + s);
+                Log.e(TAG, "汽车: " + s);
                 //复制给新新闻列表
                 dataBeans.addAll(newsListBean.getResult().getData());
                 newListAdapter.notifyDataSetChanged();
